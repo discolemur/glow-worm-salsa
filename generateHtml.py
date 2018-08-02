@@ -36,6 +36,7 @@ def seqToHtml(seq, scoresSeq, header, monochromatic) :
   xhtml = xhtml + '</td></tr>'
   return xhtml
 
+# TODO : report the color scale at the bottom. 0 [clear (linear-gradient) opaque] ${maximum p-value}
 def main(filestub, monochromatic) :
   seqs , headers = readSeqs('%s.overlaps' %filestub)
   scores , _h = readSeqs('%s.scores' %filestub)
