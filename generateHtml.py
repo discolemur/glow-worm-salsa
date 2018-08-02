@@ -17,7 +17,7 @@ def readSeqs(filename) :
     else :
       h = lines[i].strip()
   ifh.close()
-  return seqs , [ l.strip() for l in lines[::2] ]
+  return seqs , sorted([ l.strip() for l in lines[::2] ])
 
 def readScores(filename) :
   ifh = open(filename, 'rt')
@@ -89,7 +89,8 @@ def getScale(minScore, maxScore, monochromatic) :
 def main(filestub, monochromatic) :
   seqs , headers = readSeqs('%s.overlaps' %filestub)
   scores , minScore , maxScore = readScores('%s.scores' %filestub)
-  xhtml = '<html><table style=\'width: 100%; display: block;\'>'
+  title = filestub.replace('important', 'Assembled from ').replace('.txt', '-mers')
+  xhtml = '<html><span>%s</span><table style=\'width: 100%%; display: block;\'>' %title
   for h in headers :
     xhtml = xhtml + seqToHtml(seqs[h], scores[h], h, minScore, maxScore, monochromatic)
   xhtml = xhtml + '</table>' + getScale(minScore, maxScore, monochromatic) + '</html>'
